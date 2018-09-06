@@ -1,9 +1,12 @@
 #ifndef FOLDER_H
 #define FOLDER_H
 
+#include <iostream>
 #include "file.h"
 #include <map>
+
 using namespace std;
+
 
 class Folder: public File{
     private:
@@ -26,11 +29,18 @@ class Folder: public File{
           void set_permissions(int & perm);
       */
 
-      Folder();
-      Folder(string & nName, int & perms) : File(nName, perms) {}
+      Folder() {}
+      Folder(string nName, int perms) : File(nName, perms) {}
       Folder(Folder &source);
       ~Folder();
+
+      //Contents Modifiers
+      void addFile(File * source);
+      void rmFile(string fName);
+      File * openFolder(string fName);
+      
+      void print();
 };
 
-#include "folder.hpp"
+//#include "folder.hpp"
 #endif
