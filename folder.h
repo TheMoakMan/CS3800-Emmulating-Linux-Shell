@@ -30,7 +30,7 @@ class Folder: public File{
       */
 
       Folder() {}
-      Folder(string nName, int perms) : File(nName, perms) {}
+      Folder(string nName) : File(nName) {}
       Folder(Folder &source);
       ~Folder();
 

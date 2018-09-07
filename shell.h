@@ -4,19 +4,23 @@ class Shell
 {
   private:
     bool running;
-    string directory;  //Current working directory
+    Folder * rootDir;          //Root Directory
+    Folder * currDir;          //Current working directory
 
   public:
-    Shell() {running = true; directory = "ebmy83";}
+    Shell() {running = true; rootDir = new Folder("/user/local/home/sdrive"); currDir = rootDir;}
+    ~Shell() {delete rootDir;}
 
-    //Shell Operation
+    //Accessors
     bool is_active() {return running;}
+    string home() {return rootDir->get_name();}
+    string wd() {return currDir->get_name();}
+  
+    //Operation
     void exit() {running = false;}
     void selectCommand(queue<string> args);
-
+  
     //File Management
-    
-
     void pwd();
     void ls();
     void ls_l();

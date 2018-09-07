@@ -11,7 +11,7 @@ class File{
     
   public:
     File() {}
-    File(string nName, int perms) : name(nName), permissions(perms) {}
+    File(string nName) : name(nName), permissions(777) {}
     File(File &source);
     //Operator =
 

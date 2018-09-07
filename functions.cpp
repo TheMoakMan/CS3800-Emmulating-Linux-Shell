@@ -1,15 +1,15 @@
 #include "functions.h"
 
 //File interactions
-File * makeFile(string name, int perms)
+File * makeFile(string name)
 {
-  File * f1 = new File(name, perms);
+  File * f1 = new File(name);
   return f1;
 }
 
-File * makeFolder(string name, int perms)
+File * makeFolder(string name)
 {
-  Folder * f1 = new Folder(name, perms);
+  Folder * f1 = new Folder(name);
   return f1;
 }
 
@@ -21,7 +21,18 @@ Folder * fCast(File * f)
 //Shell Interactions
 void run_shell()
 {
-  
+  Shell bash;
+  File * home = makeFolder(bash.wd());
+
+  while(bash.is_active()){
+    //Wait for user input.
+    if(bash.home() != bash.wd())
+      cout << "ebmy83@Desktop:" << bash.home() << bash.wd() << "$ ";
+    else
+      cout << "ebmy83@Desktop:" << bash.home() << "$ ";
+
+    bash.selectCommand(get_input());
+  }
 
 }
 

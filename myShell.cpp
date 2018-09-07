@@ -5,6 +5,7 @@ using namespace std;
 
  int main()
 {
+  /*
   cout << "Test for compilation" << endl;
   cout << "Building a Folder: ";
   Folder sDrive("sDrive", 777);
@@ -29,6 +30,7 @@ using namespace std;
   fCast(nFolder)->addFile(makeFile("John Cena.txt",777));
   fCast(nFolder)->print();
 
+  
   //Testing input functions
   queue<string> args;
   cout << "Testing input functions. Enter args: ";
@@ -40,8 +42,10 @@ using namespace std;
     cout << args.front() << " ";
     args.pop();
   }
+  */
 
-  
+  run_shell();
+
 
   return 0;
 }
