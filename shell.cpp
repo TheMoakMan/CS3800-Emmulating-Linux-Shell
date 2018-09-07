@@ -1,5 +1,10 @@
 #include "functions.h"
 
+void Shell::selectCommand(queue<string> args)
+{
+  
+}
+
 void Shell::pwd()
 {
   

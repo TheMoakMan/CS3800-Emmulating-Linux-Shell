@@ -1,3 +1,5 @@
+#include <queue>
+
 class Shell
 {
   private:
@@ -10,8 +12,11 @@ class Shell
     //Shell Operation
     bool is_active() {return running;}
     void exit() {running = false;}
+    void selectCommand(queue<string> args);
 
     //File Management
+    
+
     void pwd();
     void ls();
     void ls_l();

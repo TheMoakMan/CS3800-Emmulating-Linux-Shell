@@ -27,14 +27,16 @@ void run_shell()
 
 queue<string> get_input()
 {
-  
+  queue<string> argQueue;
+  string arguments;
 
+  getline(cin, arguments, '\n');
 
-}
+  string arg;
+  istringstream argStream(arguments);
+  while(getline(argStream, arg, ' ')){
+    argQueue.push(arg);
+  }
 
-
-void in_parse(queue<string> args)
-{
-  
-
+   return argQueue;
 }

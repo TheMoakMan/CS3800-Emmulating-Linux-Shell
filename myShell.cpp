@@ -29,6 +29,20 @@ using namespace std;
   fCast(nFolder)->addFile(makeFile("John Cena.txt",777));
   fCast(nFolder)->print();
 
+  //Testing input functions
+  queue<string> args;
+  cout << "Testing input functions. Enter args: ";
+  args = get_input();
+
+  cout << endl;
+  int numArgs = args.size();
+  for(int i = 0; i < numArgs; i++){
+    cout << args.front() << " ";
+    args.pop();
+  }
+
+  
+
   return 0;
 }
 
