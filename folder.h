@@ -37,10 +37,9 @@ class Folder: public File{
       //Contents Modifiers
       void addFile(File * source);
       void rmFile(string fName);
-      File * openFolder(string fName);
+      Folder * openFolder(string fName);
       
       void print();
 };
 
-//#include "folder.hpp"
 #endif

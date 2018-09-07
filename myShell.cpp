@@ -1,13 +1,9 @@
 #include <iostream>
-#include "file.h"
-#include "folder.h"
+#include "functions.h"
 
 using namespace std;
 
-File * makeFile(string name, int perms);
-File * makeFolder(string name, int perms);
-
-int main()
+ int main()
 {
   cout << "Test for compilation" << endl;
   cout << "Building a Folder: ";
@@ -23,12 +19,16 @@ int main()
   
   sDrive.addFile(makeFolder("MY STUFF", 777));
 
-  File * newFolder = sDrive.openFolder("MY STUFF");
   sDrive.print();
 
-  cout << endl << endl;
-  //cout << newFolder->get_name() << endl;
-
+  cout << endl;
+  Folder * newFolder = sDrive.openFolder("MY STUFF");
   
+  File * nFolder = newFolder;
+  newFolder = nullptr;
+  fCast(nFolder)->addFile(makeFile("John Cena.txt",777));
+  fCast(nFolder)->print();
+
   return 0;
 }
+

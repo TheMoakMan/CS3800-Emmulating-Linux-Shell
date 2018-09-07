@@ -1,9 +1,11 @@
-#include "folder.h"
+#include "functions.h"
 
 Folder::Folder(Folder &source)
 {
   name = source.name;
   permissions = source.permissions;
+
+  contents = source.contents;
 }
 
 Folder::~Folder()
@@ -27,9 +29,9 @@ void Folder::rmFile(string fName)
   contents.erase(fName);
 }
 
-File * Folder::openFolder(string fName)
+Folder * Folder::openFolder(string fName)
 {
-  return contents.at(fName);
+  return fCast(contents.at(fName));
 }
 
 void Folder::print()
