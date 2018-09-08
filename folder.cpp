@@ -73,6 +73,8 @@ void Folder::printPerms()
     else
       cout << "d";                //Field for directory identifier
 
-    cout << perms_convert(it->second->get_permissions()) <<" 1 evan evan 4320 Sept 8 23:59 " << it->second->get_name() << endl;
+    cout << perms_convert(it->second->get_permissions()) <<" 1 evan evan "
+         << rand_file_size(it->second) << " Sep "<< rand_range(5,9) << " " 
+         << rand_range(0,23) << ":" << rand_range(10,59) << " " <<it->second->get_name() << endl;
   }
 }

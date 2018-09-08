@@ -103,6 +103,25 @@ bool valid_int_str(string str)
 //Extra Functions
 int rand_file_size(File * fl)
 {
-
+  random_device randDev;
+  mt19937 generator(randDev()); 
   
+  if(fl->is_base()){
+    uniform_int_distribution<int> range(50, 1100);
+    return range(generator);
+  }
+  else{
+    uniform_int_distribution<int> range(1000,4500);
+    return range(generator);
+  }
+}
+
+int rand_range(int low, int up)
+{
+  random_device randDev;
+  mt19937 generator(randDev()); 
+  
+  uniform_int_distribution<int> range(low, up);
+  
+  return range(generator);
 }

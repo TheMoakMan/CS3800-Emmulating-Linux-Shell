@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <sstream>
+#include <random>
+#include <ctime>
 #include "folder.h"
 #include "shell.h"
 
@@ -19,5 +21,6 @@ bool valid_int_str(string str);
 
 //Extra Functionality
 int rand_file_size(File * fl);
+int rand_range(int low, int up);
 
 #endif
