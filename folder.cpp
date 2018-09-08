@@ -4,9 +4,10 @@ Folder::Folder(Folder &source)
 {
   name = source.name;
   permissions = source.permissions;
-  is_base_file = false;
-
+  parentDir = source.parentDir;
   contents = source.contents;
+
+  is_base_file = false;
 }
 
 Folder::~Folder()
@@ -38,6 +39,16 @@ File * Folder::getFile(string fName)
 Folder * Folder::openFolder(string fName)
 {
   return fCast(contents.at(fName));
+}
+
+bool Folder::contains(string fName)
+{
+  auto it = contents.find(fName);
+
+  if(it == contents.end())
+    return false;
+  else 
+    return true;
 }
 
 void Folder::print()

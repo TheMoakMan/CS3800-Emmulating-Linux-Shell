@@ -8,7 +8,7 @@ class Shell
     Folder * currDir;          //Current working directory
 
   public:
-    Shell() {running = true; rootDir = new Folder("/user/local/home/sdrive"); currDir = rootDir;}
+    Shell() {running = true; rootDir = new Folder("/user/local/home/sdrive", nullptr); currDir = rootDir;}
     ~Shell() {delete rootDir;}
 
     //Accessors

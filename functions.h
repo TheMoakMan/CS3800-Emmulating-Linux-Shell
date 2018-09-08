@@ -8,7 +8,7 @@
 
 //File And Folder manipulation
 File * makeFile(string name);
-File * makeFolder(string name);
+File * makeFolder(string name, Folder * parent);
 Folder * fCast(File * f);
 
 //Shell interaction

@@ -7,9 +7,9 @@ File * makeFile(string name)
   return f1;
 }
 
-File * makeFolder(string name)
+File * makeFolder(string name, Folder * parent)
 {
-  Folder * f1 = new Folder(name);
+  Folder * f1 = new Folder(name, parent);
   return f1;
 }
 
@@ -22,7 +22,6 @@ Folder * fCast(File * f)
 void run_shell()
 {
   Shell bash;
-  File * home = makeFolder(bash.wd());
 
   while(bash.is_active()){
     //Wait for user input.

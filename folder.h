@@ -20,6 +20,9 @@ class Folder: public File{
        //Containter to hold the conents of the directory, 
        //Can hold files or other folders.
        map<string, File *> contents; 
+
+       //Pointer to the parent directory
+       Folder * parentDir;
        
     public:
       /*
@@ -32,7 +35,7 @@ class Folder: public File{
       */
 
       Folder() {is_base_file = false;}
-      Folder(string nName) : File(nName) {is_base_file = false;}
+      Folder(string nName, Folder * parent) : File(nName), parentDir(parent) {is_base_file = false;}
       Folder(Folder &source);
       ~Folder();
 
@@ -42,6 +45,8 @@ class Folder: public File{
       File * getFile(string fName);
       Folder * openFolder(string fName);
 
+      Folder * getParent() {return parentDir;}
+      bool contains(string fName);
       int numFiles() {return contents.size();}
       
       void print();
