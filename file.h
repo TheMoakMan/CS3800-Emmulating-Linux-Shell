@@ -8,6 +8,7 @@ class File{
   protected:
     string name;
     int permissions;
+    bool is_base_file = true;    //flag to check if a given file is base file or a folder.
     
   public:
     File() {}
@@ -18,6 +19,7 @@ class File{
     //Accessors
     string get_name() {return name;}
     int get_permissions() {return permissions;}
+    bool is_base() {return is_base_file;}
 
     //Mutators
     void set_name(string & nName) {name = nName;}

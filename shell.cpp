@@ -20,6 +20,25 @@ void Shell::selectCommand(queue<string> args)
       this->mkdir(args.front());
     }
   }
+  else if(command == "ls"){
+    this->ls();
+  }
+  else if(command == "rm"){
+    numArgs--;
+    
+    for(int i = 0; i < numArgs; i++){
+      args.pop();
+      this->rm(args.front());
+    }
+  }
+  else if(command == "rmdir"){
+    numArgs--;
+    
+    for(int i = 0; i < numArgs; i++){
+      args.pop();
+      this->rmdir(args.front());
+    } 
+  }
   else{
     return; 
   }
@@ -28,12 +47,13 @@ void Shell::selectCommand(queue<string> args)
 
 void Shell::pwd()
 {
-  cout << this->currDir->get_name() << endl;
+  cout << currDir->get_name() << endl;
 }
 
 void Shell::ls()
 {
-
+  if(currDir->numFiles() > 0)
+    currDir->print();
 }
 
 void Shell::ls_l()
@@ -48,12 +68,15 @@ void Shell::cd(string filePath)
 
 void Shell::mkdir(string fName)
 {
-  cout << "Making Dir: " << fName << endl;
+  currDir->addFile(makeFolder(fName));
 }
 
 void Shell::rmdir(string fName)
 {
-
+  if(!(currDir->getFile(fName)->is_base()))
+    currDir->rmFile(fName);
+  else 
+    cout << "rmdir: failed to remove '" << fName << "': Not a directory" << endl;
 }
 
 void Shell::touch(string fName)
@@ -63,7 +86,10 @@ void Shell::touch(string fName)
 
 void Shell::rm(string fName)
 {
-
+  if(currDir->getFile(fName)->is_base())
+    currDir->rmFile(fName);
+  else
+    cout << "rm: cannot remove '" << fName << "': Is a directory" << endl;
 }
 
 void Shell::chmod(int perms, string fName)

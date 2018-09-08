@@ -18,7 +18,7 @@ Folder * fCast(File * f)
   return static_cast<Folder *>(f);
 }
 
-//Shell Interactions
+//Shell Environment
 void run_shell()
 {
   Shell bash;
@@ -33,7 +33,6 @@ void run_shell()
 
     bash.selectCommand(get_input());
   }
-
 }
 
 queue<string> get_input()

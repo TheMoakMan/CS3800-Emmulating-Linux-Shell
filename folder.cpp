@@ -4,6 +4,7 @@ Folder::Folder(Folder &source)
 {
   name = source.name;
   permissions = source.permissions;
+  is_base_file = false;
 
   contents = source.contents;
 }
@@ -29,6 +30,11 @@ void Folder::rmFile(string fName)
   contents.erase(fName);
 }
 
+File * Folder::getFile(string fName)
+{
+  return contents.at(fName);
+}
+
 Folder * Folder::openFolder(string fName)
 {
   return fCast(contents.at(fName));
@@ -36,8 +42,13 @@ Folder * Folder::openFolder(string fName)
 
 void Folder::print()
 {
+  int numElms = 0;
   for(auto it = contents.begin(); it != contents.end(); it++){
+     if(numElms > 8)
+       cout << endl;
+
      cout << it->second->get_name() << " ";
+     numElms++;
   }
 
   cout << endl;

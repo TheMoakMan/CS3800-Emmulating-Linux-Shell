@@ -7,8 +7,8 @@
 #include "shell.h"
 
 //File And Folder manipulation
-File * makeFile(string name, int perms);
-File * makeFolder(string name, int perms);
+File * makeFile(string name);
+File * makeFolder(string name);
 Folder * fCast(File * f);
 
 //Shell interaction
