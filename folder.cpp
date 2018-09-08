@@ -64,3 +64,15 @@ void Folder::print()
 
   cout << endl;
 }
+
+void Folder::printPerms()
+{
+  for(auto it = contents.begin(); it != contents.end(); it++){
+    if(it->second->is_base())
+      cout << "-";                //Field for file identifier
+    else
+      cout << "d";                //Field for directory identifier
+
+    cout << perms_convert(it->second->get_permissions()) <<" 1 evan evan 4320 Sept 8 23:59 " << it->second->get_name() << endl;
+  }
+}

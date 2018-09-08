@@ -31,11 +31,5 @@ class Shell
     void rm(string fName);
     void chmod(int perms, string fName);
 
-
-
-
-
-
-
 };
 

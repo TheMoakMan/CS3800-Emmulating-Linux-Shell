@@ -21,7 +21,12 @@ void Shell::selectCommand(queue<string> args)
     }
   }
   else if(command == "ls"){
-    this->ls();
+    args.pop();
+    
+    if(args.front() == "-l")
+      this->ls_l();
+    else  
+      this->ls();
   }
   else if(command == "rm"){
     numArgs--;
@@ -51,6 +56,24 @@ void Shell::selectCommand(queue<string> args)
     args.pop();
     this->cd(args.front());  
   }
+  else if(command == "chmod"){
+    if(args.size() < 3)
+      cout << "chmod: missing operand" << endl;
+    else{
+      args.pop();
+
+      if(valid_int_str(args.front())){
+        int perms = stoi(args.front());
+        
+        if(perms >= 0 && perms <= 777){
+          args.pop();
+          this->chmod(perms, args.front());
+        }
+        else
+          cout << "chmod: invalid mode: '" << perms << "'" << endl;
+      }
+    }
+  }
   else{
     return;
   } 
@@ -69,7 +92,7 @@ void Shell::ls()
 
 void Shell::ls_l()
 {
-  
+  currDir->printPerms();
 }
 
 void Shell::cd(string fName)
@@ -85,8 +108,12 @@ void Shell::cd(string fName)
       currDir->set_name(origName);
     }  
   } 
-  else{  
-    if(currDir->contains(fName)){
+
+  if(currDir->contains(fName)){
+    if(currDir->getFile(fName)->is_base()){
+      cout << "-bash: cd: " << fName << ": Not a directory" << endl;
+    } 
+    else{  
       Folder * temp = currDir->openFolder(fName);
       
       string altName = currDir->get_name();
@@ -94,9 +121,11 @@ void Shell::cd(string fName)
 
       currDir->set_name(altName);
 
-      currDir = temp;
-    }
- } 
+      currDir = temp;  
+    } 
+  }
+  else
+    cout << "-bash: cd: " << fName << ": No such file or directory" << endl;
 }
 
 void Shell::mkdir(string fName)
@@ -111,7 +140,9 @@ void Shell::rmdir(string fName)
       currDir->rmFile(fName);
     else 
       cout << "rmdir: failed to remove '" << fName << "': Not a directory" << endl;
-  }  
+  } 
+  else 
+    cout << "rmdir: failed to remove '" << fName << "': No such file or directory" << endl; 
 }
 
 void Shell::touch(string fName)
@@ -127,9 +158,15 @@ void Shell::rm(string fName)
     else
       cout << "rm: cannot remove '" << fName << "': Is a directory" << endl;
   }
+  else
+    cout << "rm: cannot remove '" << fName << "': No such file or directory" << endl;
 }
 void Shell::chmod(int perms, string fName)
 {
-
+  if(currDir->contains(fName)){
+    currDir->getFile(fName)->set_permissions(perms);
+  }
+  else
+    cout << "chmod: cannot access '" << fName << "': No such file or directory" << endl;
 }
 

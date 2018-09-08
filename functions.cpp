@@ -18,6 +18,41 @@ Folder * fCast(File * f)
   return static_cast<Folder *>(f);
 }
 
+string perms_convert(int perms)
+{
+  string bcd = to_string(perms);
+  string converted;
+  
+  for(int i = 0; i < 3; i++){
+    if(bcd[i] == '0'){
+      converted.append("---");
+    }
+    else if(bcd[i] == '1'){
+      converted.append("--x");
+    }
+    else if(bcd[i] == '2'){
+      converted.append("-w-"); 
+    }
+    else if(bcd[i] == '3'){
+      converted.append("-wx");
+    }
+    else if(bcd[i] == '4'){
+      converted.append("r--");
+    }
+    else if(bcd[i] == '5'){
+      converted.append("r-x");
+    }
+    else if(bcd[i] == '6'){
+      converted.append("rw-");
+    }
+    else if(bcd[i] == '7'){
+      converted.append("rwx");
+    }  
+  }
+
+  return converted;
+}
+
 //Shell Environment
 void run_shell()
 {
@@ -48,4 +83,26 @@ queue<string> get_input()
   }
 
    return argQueue;
+}
+
+bool valid_int_str(string str)
+{
+  bool is_valid = true;
+
+  if(str.size() != 3)
+    is_valid = false;
+  else
+    for(int i = 0; i < 3; i++){
+      if(!(str[i] >= '0' && str[i] <= '9'))
+        is_valid = false; 
+    }
+
+  return is_valid;
+}
+
+//Extra Functions
+int rand_file_size(File * fl)
+{
+
+  
 }
