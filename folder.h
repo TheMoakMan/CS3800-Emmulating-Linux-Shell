@@ -15,6 +15,7 @@ class Folder: public File{
           string name;
           int permissions;
           bool is_base_file;
+          string logs;
       */
        
        //Containter to hold the conents of the directory, 
@@ -27,7 +28,7 @@ class Folder: public File{
     public:
 
       Folder() {is_base_file = false;}
-      Folder(string nName, Folder * parent) : File(nName), parentDir(parent) {is_base_file = false;}
+      Folder(string nName, Folder * parent) : File(nName), parentDir(parent) {is_base_file = false; logs = generate_logs();}
       Folder(Folder &source);
       ~Folder();
 
@@ -44,6 +45,7 @@ class Folder: public File{
           string get_name();
           int get_permissions();
           bool is_base();
+          string get_logs();
           void set_name(string & nName);
           void set_permissions(int & perm);
       */

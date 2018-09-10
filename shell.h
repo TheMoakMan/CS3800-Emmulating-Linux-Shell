@@ -13,8 +13,9 @@ class Shell
 
     //Accessors
     bool is_active() {return running;}
-    string home() {return rootDir->get_name();}
-    string wd() {return currDir->get_name();}
+    Folder * home() {return rootDir;}
+    Folder * wd() {return currDir;}
+    string getFilepath(Folder * dir);
   
     //Operation
     void exit() {running = false;}

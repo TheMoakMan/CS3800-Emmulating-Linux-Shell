@@ -9,7 +9,7 @@ void Shell::selectCommand(queue<string> args)
   if(command == "pwd"){
     this->pwd();   
   }
-  else if(command == "exit"){
+  else if(command == "exit" || command == "quit"){
     this->exit();
   }
   else if(command == "mkdir"){
@@ -74,6 +74,10 @@ void Shell::selectCommand(queue<string> args)
       }
     }
   }
+  else if(command == "parent"){
+    args.pop();
+    cout << currDir->getParent()->get_name() << endl;
+  }
   else{
     return;
   } 
@@ -81,7 +85,7 @@ void Shell::selectCommand(queue<string> args)
 
 void Shell::pwd()
 {
-  cout << currDir->get_name() << endl;
+  cout << getFilepath(currDir) << endl;
 }
 
 void Shell::ls()
@@ -105,11 +109,11 @@ void Shell::cd(string fName)
       string origName = currDir->get_name();
       origName.pop_back();
 
-      currDir->set_name(origName);
+      currDir->set_name(origName);  
     }  
   } 
 
-  if(currDir->contains(fName)){
+  else if(currDir->contains(fName)){
     if(currDir->getFile(fName)->is_base()){
       cout << "-bash: cd: " << fName << ": Not a directory" << endl;
     } 
@@ -168,5 +172,13 @@ void Shell::chmod(int perms, string fName)
   }
   else
     cout << "chmod: cannot access '" << fName << "': No such file or directory" << endl;
+}
+
+string Shell::getFilepath(Folder * dir)
+{
+  if(dir->getParent() == nullptr)
+    return dir->get_name();
+
+  return getFilepath(dir->getParent()) + dir->get_name();
 }
 

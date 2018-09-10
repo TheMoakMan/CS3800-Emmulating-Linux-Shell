@@ -5,6 +5,7 @@ Folder::Folder(Folder &source)
   name = source.name;
   permissions = source.permissions;
   parentDir = source.parentDir;
+  logs = source.logs;
   contents = source.contents;
 
   is_base_file = false;
@@ -73,8 +74,7 @@ void Folder::printPerms()
     else
       cout << "d";                //Field for directory identifier
 
-    cout << perms_convert(it->second->get_permissions()) <<" 1 evan evan "
-         << rand_file_size(it->second) << " Sep "<< rand_range(5,9) << " " 
-         << rand_range(0,23) << ":" << rand_range(10,59) << " " <<it->second->get_name() << endl;
+    cout.fill('0');
+    cout << perms_convert(it->second->get_permissions()) << it->second->get_logs() << " " << it->second->get_name() << endl;
   }
 }

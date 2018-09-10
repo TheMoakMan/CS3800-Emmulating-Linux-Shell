@@ -1,6 +1,6 @@
 #include "functions.h"
 
-//File interactions
+/*~~~File interactions~~~*/
 File * makeFile(string name)
 {
   File * f1 = new File(name);
@@ -53,17 +53,14 @@ string perms_convert(int perms)
   return converted;
 }
 
-//Shell Environment
+/*~~~Shell Environment~~~*/
 void run_shell()
 {
   Shell bash;
 
   while(bash.is_active()){
     //Wait for user input.
-    if(bash.home() != bash.wd())
-      cout << "ebmy83@Desktop:" << bash.home() << bash.wd() << "$ ";
-    else
-      cout << "ebmy83@Desktop:" << bash.home() << "$ ";
+    cout << "ebmy83@Desktop:" << bash.getFilepath(bash.wd()) << "$ ";
 
     bash.selectCommand(get_input());
   }
@@ -79,7 +76,8 @@ queue<string> get_input()
   string arg;
   istringstream argStream(arguments);
   while(getline(argStream, arg, ' ')){
-    argQueue.push(arg);
+    if(arg != "")
+      argQueue.push(arg);
   }
 
    return argQueue;
@@ -100,7 +98,7 @@ bool valid_int_str(string str)
   return is_valid;
 }
 
-//Extra Functions
+/*~~~Extra Functions~~~*/
 int rand_file_size(File * fl)
 {
   random_device randDev;
