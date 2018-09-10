@@ -1,0 +1,2 @@
+This file was written from Vim which was called from within "fake" shell for CS3800.
+Try for yourself by typing vim into the terminal.

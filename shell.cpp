@@ -74,11 +74,43 @@ void Shell::selectCommand(queue<string> args)
       }
     }
   }
-  else if(command == "parent"){
+  else if(command == "vim"){
     args.pop();
-    cout << currDir->getParent()->get_name() << endl;
+    string vimCommand = "/usr/bin/vim " + args.front();
+
+    system(vimCommand.c_str());
+  }
+  else if(command == "sudo"){
+    args.pop();
+
+    if(args.front() == "apt"){
+      args.pop();
+
+      if(args.front() == "install"){
+        args.pop();
+        this->sudoAptInstall(args.front());
+      }
+      else
+        system("/usr/bin/sudo /usr/bin/apt"); 
+    }
+  
+    else
+      system("/usr/bin/sudo");
+  }
+  else if(command == "make"){
+      args.pop();
+      if(args.front() == "sandwich" || args.front() == "Sandwich"){
+        cout << "\nmake: Target 'sandwich': Not found, " << endl << endl;
+        cout << "Try sudo apt install wife" << endl << endl;
+      }
+      else{
+        cout << "\nCommand '" << command << "' not found, but can be installed with: " << endl << endl;
+        cout << "Try sudo apt install " << command << endl << endl;
+      }
   }
   else{
+    cout << "\nCommand '" << command << "' not found, but can be installed with: " << endl << endl;
+    cout << "Try sudo apt install " << command << endl << endl;
     return;
   } 
 }
@@ -181,4 +213,12 @@ string Shell::getFilepath(Folder * dir)
 
   return getFilepath(dir->getParent()) + dir->get_name();
 }
+
+void Shell::sudoAptInstall(string name)
+{
+  string path = "/usr/bin/sudo /usr/bin/apt install " + name;
+  system(path.c_str());
+}
+
+
 

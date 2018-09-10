@@ -31,6 +31,7 @@ class Shell
     void touch(string fName);
     void rm(string fName);
     void chmod(int perms, string fName);
+    void sudoAptInstall(string name);
 
 };
 
