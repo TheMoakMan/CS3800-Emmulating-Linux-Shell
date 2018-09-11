@@ -26,5 +26,3 @@ class File{
     void set_permissions(int & perms) {permissions = perms;}
     string generate_logs();
 };
-
-#endif

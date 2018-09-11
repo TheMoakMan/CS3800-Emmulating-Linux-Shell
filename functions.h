@@ -22,5 +22,6 @@ bool valid_int_str(string str);
 //Extra Functionality
 int rand_file_size(File * fl);
 int rand_range(int low, int up);
+void removeQuotes(string & str);
 
 #endif

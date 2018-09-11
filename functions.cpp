@@ -70,7 +70,7 @@ queue<string> get_input()
 {
   queue<string> argQueue;
   string arguments;
-
+  
   getline(cin, arguments, '\n');
 
   string arg;
@@ -122,4 +122,33 @@ int rand_range(int low, int up)
   uniform_int_distribution<int> range(low, up);
   
   return range(generator);
+}
+
+void removeQuotes(string & str)
+{
+  size_t found = str.find('"');
+  int pos_1, pos_2;
+
+  if(found != string::npos){
+    cout << "Found a quote! " << endl;
+    pos_1 = found;
+  }
+
+  found = str.find('"', found + 1);
+  if(found != string::npos){
+    cout << "Found second quote" << endl;
+    pos_2 = found;
+  }
+  
+  if(pos_1 != 0){
+    int i = pos_1;
+    int count = 0;
+    while(str[i] != ' ' && i < pos_2){
+      count++;
+      i++;
+    }
+
+    str.replace(pos_1+count, pos_1+count+1, "_");
+    str.erase(pos_1);
+  }
 }

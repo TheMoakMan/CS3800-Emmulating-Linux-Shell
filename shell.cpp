@@ -53,8 +53,10 @@ void Shell::selectCommand(queue<string> args)
     } 
   }
   else if(command == "cd"){
-    args.pop();
-    this->cd(args.front());  
+    if(args.size() > 1){
+      args.pop();
+      this->cd(args.front());
+    }
   }
   else if(command == "chmod"){
     if(args.size() < 3)
@@ -105,12 +107,12 @@ void Shell::selectCommand(queue<string> args)
       }
       else{
         cout << "\nCommand '" << command << "' not found, but can be installed with: " << endl << endl;
-        cout << "Try sudo apt install " << command << endl << endl;
+        cout << "sudo apt install " << command << endl << endl;
       }
   }
   else{
     cout << "\nCommand '" << command << "' not found, but can be installed with: " << endl << endl;
-    cout << "Try sudo apt install " << command << endl << endl;
+    cout << "sudo apt install " << command << endl << endl;
     return;
   } 
 }
@@ -144,7 +146,6 @@ void Shell::cd(string fName)
       currDir->set_name(origName);  
     }  
   } 
-
   else if(currDir->contains(fName)){
     if(currDir->getFile(fName)->is_base()){
       cout << "-bash: cd: " << fName << ": Not a directory" << endl;
