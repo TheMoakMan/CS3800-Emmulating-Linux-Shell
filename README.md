@@ -8,7 +8,7 @@ or using the g++ compiler with flags set for c++ 11. Executable will be named pr
 
 Input is set to be read in the same was that a linux shell reads in input, with the enter key being
 the end of a command statement. Invalid input will be addressed. Support for Quotes on arguments to skip
-whitespace is not yet integrated. 
+whitespace is not yet integrated.
 
 List of valid commands:
     $pwd
@@ -26,6 +26,9 @@ List of valid commands:
     $vim <filename>          #Runs Vim text editer from system and opens a file of the given name
     $sudo apt install <name> #DO NOT RECOMEND WITHOUT ADMIN PRIVILEDGES
     $make sandwich           #Try it, its fun.
+
+If program code for some reason is missing in does not run,
+the program is also saved to the git repository: https://github.com/TheMoakMan/CS3800-Emulating-Linux-Shell.git
 
 
   
