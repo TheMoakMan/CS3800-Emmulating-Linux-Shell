@@ -32,13 +32,14 @@ class Folder: public File{
       Folder(Folder &source);
       ~Folder();
 
-      //Contents Modifiers
+      //Content Accessors / Modifier
       void addFile(File * source);
       void rmFile(string fName);
       File * getFile(string fName);
       Folder * openFolder(string fName);
       bool contains(string fName);
       int numFiles() {return contents.size();}
+      bool is_empty() {return contents.empty();}
 
       /*
         Inherited:
@@ -51,6 +52,7 @@ class Folder: public File{
       */
       Folder * getParent() {return parentDir;}
       
+      //Output
       void print();
       void printPerms();
 };

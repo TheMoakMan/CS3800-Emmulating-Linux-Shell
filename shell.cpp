@@ -1,5 +1,11 @@
 #include "functions.h"
 
+/*
+  Takes in a queue containing all command line arguments,
+  determines which command is being selected and calls
+  the appropriate Shell class member function. 
+  If incorrect input is entered, error messages will be displayed. 
+*/
 void Shell::selectCommand(queue<string> args)
 {
   int numArgs = args.size();
@@ -117,6 +123,7 @@ void Shell::selectCommand(queue<string> args)
   } 
 }
 
+/*~~~Command Functions~~~*/
 void Shell::pwd()
 {
   cout << getFilepath(currDir) << endl;
@@ -136,7 +143,11 @@ void Shell::ls_l()
 void Shell::cd(string fName)
 {
   if(fName == ".."){
+    //Alters the name of the parent by removing a '/' that is appended
+    //for filepath display.
+
     if(currDir->getParent() != nullptr){
+      //Sets the pointer of the current directory to that of the parent.
       Folder * temp = currDir->getParent();
       currDir = temp;
 
@@ -151,6 +162,8 @@ void Shell::cd(string fName)
       cout << "-bash: cd: " << fName << ": Not a directory" << endl;
     } 
     else{  
+      //Appends '/' on to name of current directory for filepath display
+      //and updates the currDir pointer.
       Folder * temp = currDir->openFolder(fName);
       
       string altName = currDir->get_name();
@@ -173,8 +186,12 @@ void Shell::mkdir(string fName)
 void Shell::rmdir(string fName)
 {
   if(currDir->contains(fName)){
-    if(!(currDir->getFile(fName)->is_base()))
-      currDir->rmFile(fName);
+    if(!(currDir->getFile(fName)->is_base())){
+      if(currDir->openFolder(fName)->is_empty())
+        currDir->rmFile(fName);
+      else
+        cout << "rmdir: failed to remove '" << fName << "': Directory not empty" << endl;
+    }
     else 
       cout << "rmdir: failed to remove '" << fName << "': Not a directory" << endl;
   } 
@@ -207,6 +224,7 @@ void Shell::chmod(int perms, string fName)
     cout << "chmod: cannot access '" << fName << "': No such file or directory" << endl;
 }
 
+//Recursive function to build a string representing the filepath of a given directory.
 string Shell::getFilepath(Folder * dir)
 {
   if(dir->getParent() == nullptr)
@@ -215,6 +233,9 @@ string Shell::getFilepath(Folder * dir)
   return getFilepath(dir->getParent()) + dir->get_name();
 }
 
+//Calls the actual "sudo apt install" command from the system.
+//DO NOT RECOMMEND CALLING WITHOUT ADMIN PRIVLEGES.
+//This function was written purely for testing the limits of the program.
 void Shell::sudoAptInstall(string name)
 {
   string path = "/usr/bin/sudo /usr/bin/apt install " + name;

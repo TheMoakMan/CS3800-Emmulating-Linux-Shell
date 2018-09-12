@@ -1,5 +1,8 @@
 #include "functions.h"
 
+const string MONTH = " Sept ";
+
+
 File::File(File &source)
 {
   name = source.name;
@@ -7,6 +10,10 @@ File::File(File &source)
   logs = source.logs;
 }
 
+/*
+  Generates log data listed after permissions with the 
+  ls -l command. 
+*/
 string File::generate_logs()
 {
   string logs = " 1 evan evan ";
@@ -26,7 +33,7 @@ string File::generate_logs()
     logs.append(to_string(tempRand));
 
   //Add date information
-  logs.append(" Sept ");
+  logs.append(MONTH);
 
   tempRand = rand_range(7,10);
 

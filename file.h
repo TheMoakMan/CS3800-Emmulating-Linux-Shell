@@ -7,7 +7,7 @@ class File{
   protected:
     string name;
     int permissions;
-    bool is_base_file = true;    //flag to check if a given file is base file or a folder.
+    bool is_base_file = true;    //Flag to check if a given file is base file or a folder.
     string logs;
 
   public:
@@ -26,3 +26,5 @@ class File{
     void set_permissions(int & perms) {permissions = perms;}
     string generate_logs();
 };
+
+#endif

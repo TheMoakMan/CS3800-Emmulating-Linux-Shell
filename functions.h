@@ -8,6 +8,11 @@
 #include "folder.h"
 #include "shell.h"
 
+const int LOW_FILE_SIZE_LIM = 50;
+const int UP_FILE_SIZE_LIM = 1100;
+const int LOW_FOLDER_SIZE_LIM = 1000;
+const int UP_FOLDER_SIZE_LIM = 4500;
+
 //File And Folder manipulation
 File * makeFile(string name);
 File * makeFolder(string name, Folder * parent);
@@ -22,6 +27,5 @@ bool valid_int_str(string str);
 //Extra Functionality
 int rand_file_size(File * fl);
 int rand_range(int low, int up);
-void removeQuotes(string & str);
 
 #endif

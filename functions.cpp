@@ -1,23 +1,41 @@
 #include "functions.h"
 
 /*~~~File interactions~~~*/
+
+/*
+  Dynamically allocates a new File object and returns a pointer
+  to to that object.
+*/
 File * makeFile(string name)
 {
   File * f1 = new File(name);
   return f1;
 }
 
+/*
+  Dynamically allocates a new Folder object and returns a pointer
+  to to that object.
+*/
 File * makeFolder(string name, Folder * parent)
 {
   Folder * f1 = new Folder(name, parent);
   return f1;
 }
 
+/*
+  Casts a pointer to a file object to that of a folder object.
+  Should only be called if File object is actually a Folder.
+*/
 Folder * fCast(File * f)
 {
   return static_cast<Folder *>(f);
 }
 
+/*
+  Converts a valid 3 digit integer into an int string, 
+  interprets each digit and builds a new string to represent
+  file permissions. 
+*/
 string perms_convert(int perms)
 {
   string bcd = to_string(perms);
@@ -66,6 +84,11 @@ void run_shell()
   }
 }
 
+/*
+  Reads input from the user via getline and uses string streams to break
+  that input up into substrings with whitespace as a delimiting character.
+  Substrings are pushed into a queue data type to be interpreted later.
+*/
 queue<string> get_input()
 {
   queue<string> argQueue;
@@ -83,6 +106,9 @@ queue<string> get_input()
    return argQueue;
 }
 
+/*
+  Checks to see if a given string can represent a 3 digit integer.
+*/
 bool valid_int_str(string str)
 {
   bool is_valid = true;
@@ -99,21 +125,32 @@ bool valid_int_str(string str)
 }
 
 /*~~~Extra Functions~~~*/
+
+/*
+  Generates a random integer to represent the filesize of a given file
+  based on type. Folders and regular files have different ranges.
+  Filesize represented in bytes.
+  Random numbers are generated via funcitons in the <random> library
+*/
 int rand_file_size(File * fl)
 {
   random_device randDev;
   mt19937 generator(randDev()); 
   
   if(fl->is_base()){
-    uniform_int_distribution<int> range(50, 1100);
+    uniform_int_distribution<int> range(LOW_FILE_SIZE_LIM, UP_FILE_SIZE_LIM);
     return range(generator);
   }
   else{
-    uniform_int_distribution<int> range(1000,4500);
+    uniform_int_distribution<int> range(LOW_FOLDER_SIZE_LIM, UP_FOLDER_SIZE_LIM);
     return range(generator);
   }
 }
 
+/*
+  Generates a random integer within a ceratin range.
+  Random numbers are generated via funcitons in the <random> library
+*/
 int rand_range(int low, int up)
 {
   random_device randDev;
@@ -122,33 +159,4 @@ int rand_range(int low, int up)
   uniform_int_distribution<int> range(low, up);
   
   return range(generator);
-}
-
-void removeQuotes(string & str)
-{
-  size_t found = str.find('"');
-  int pos_1, pos_2;
-
-  if(found != string::npos){
-    cout << "Found a quote! " << endl;
-    pos_1 = found;
-  }
-
-  found = str.find('"', found + 1);
-  if(found != string::npos){
-    cout << "Found second quote" << endl;
-    pos_2 = found;
-  }
-  
-  if(pos_1 != 0){
-    int i = pos_1;
-    int count = 0;
-    while(str[i] != ' ' && i < pos_2){
-      count++;
-      i++;
-    }
-
-    str.replace(pos_1+count, pos_1+count+1, "_");
-    str.erase(pos_1);
-  }
 }

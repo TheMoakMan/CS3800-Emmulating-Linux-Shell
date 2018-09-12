@@ -1,3 +1,6 @@
+#ifndef SHELL_H
+#define SHELL_H
+
 #include <queue>
 
 class Shell
@@ -8,6 +11,7 @@ class Shell
     Folder * currDir;          //Current working directory
 
   public:
+    //Constructor creates root directory and sets 
     Shell() {running = true; rootDir = new Folder("/user/local/home/sdrive", nullptr); currDir = rootDir;}
     ~Shell() {delete rootDir;}
 
@@ -33,3 +37,5 @@ class Shell
     void chmod(int perms, string fName);
     void sudoAptInstall(string name);
 };
+
+#endif
