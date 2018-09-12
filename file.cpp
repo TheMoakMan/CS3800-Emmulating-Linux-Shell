@@ -32,35 +32,22 @@ string File::generate_logs()
   else
     logs.append(to_string(tempRand));
 
-  //Add date information
-  logs.append(MONTH);
 
-  tempRand = rand_range(7,10);
-
-  if(tempRand < 10){
-    logs.append(" ");
-  }
-
-  logs.append(to_string(tempRand));
-
-  //Add time information
+  //Add date and time information
   logs.append(" ");
-  tempRand = rand_range(1,23);
 
-  if(tempRand < 10){
-    logs.append("0");
-  }
+  //Declare time variables and read from system.
+  time_t tTime;
+  struct tm * ti;
+
+  time(&tTime);
+  ti = localtime(&tTime);
+
+  //Add time to the string.
+  logs.append(asctime(ti));
+
+  //Modify time to fit proper format.
+  logs.erase(logs.size() - 9, logs.size()-1);
   
-  logs.append(to_string(tempRand));
-  logs.append(":");
-
-  tempRand = rand_range(1,59);
-  
-   if(tempRand < 10){
-    logs.append("0");
-  }
-
-  logs.append(to_string(tempRand));
-
   return logs;
 }

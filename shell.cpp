@@ -28,11 +28,14 @@ void Shell::selectCommand(queue<string> args)
   }
   else if(command == "ls"){
     args.pop();
-    
-    if(args.front() == "-l")
-      this->ls_l();
+
+    if(args.size() > 0){
+      if(args.front() == "-l")
+        this->ls_l();
+    }    
     else  
       this->ls();
+  
   }
   else if(command == "rm"){
     numArgs--;
@@ -107,13 +110,16 @@ void Shell::selectCommand(queue<string> args)
   }
   else if(command == "make"){
       args.pop();
-      if(args.front() == "sandwich" || args.front() == "Sandwich"){
-        cout << "\nmake: Target 'sandwich': Not found, " << endl << endl;
-        cout << "Try sudo apt install wife" << endl << endl;
-      }
+      if(args.size() > 0){
+        if(args.front() == "sandwich" || args.front() == "Sandwich"){
+          cout << "\nmake: Target 'sandwich': Not found, " << endl << endl;
+          cout << "Try sudo apt install wife" << endl << endl;
+        }
+        else
+          cout << "make: Target '" << args.front() << "': Not found" << endl;
+      }  
       else{
-        cout << "\nCommand '" << command << "' not found, but can be installed with: " << endl << endl;
-        cout << "sudo apt install " << command << endl << endl;
+        cout << command << ": No targets specified or no makefile found " << endl;
       }
   }
   else{
@@ -180,7 +186,11 @@ void Shell::cd(string fName)
 
 void Shell::mkdir(string fName)
 {
-  currDir->addFile(makeFolder(fName, currDir));
+  if(currDir->contains(fName)){
+    cout << "mkdir: cannot create directory '" << fName << "' File exists" << endl;
+  }
+  else
+    currDir->addFile(makeFolder(fName, currDir));
 }
 
 void Shell::rmdir(string fName)
@@ -201,7 +211,16 @@ void Shell::rmdir(string fName)
 
 void Shell::touch(string fName)
 {
-  currDir->addFile(makeFile(fName));
+  /*
+    If a file or directory already exits, just update timestamp.
+    If not then create a new file.
+  */
+
+  if(currDir->contains(fName)){
+    currDir->getFile(fName)->update_logs();
+  }
+  else 
+    currDir->addFile(makeFile(fName));
 }
 
 void Shell::rm(string fName)

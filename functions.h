@@ -5,6 +5,7 @@
 #include <sstream>
 #include <unistd.h>
 #include <random>
+#include <ctime>
 #include "folder.h"
 #include "shell.h"
 

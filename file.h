@@ -24,7 +24,9 @@ class File{
     //Mutators
     void set_name(string & nName) {name = nName;}
     void set_permissions(int & perms) {permissions = perms;}
+    void update_logs() {logs = generate_logs();}
     string generate_logs();
+
 };
 
 #endif
