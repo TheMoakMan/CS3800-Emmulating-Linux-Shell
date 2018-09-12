@@ -7,7 +7,8 @@ Please run this program either using the makefile provided with the command $mak
 or using the g++ compiler with flags set for c++ 11. Executable will be named program.
 
 Input is set to be read in the same was that a linux shell reads in input, with the enter key being
-the end of a command statement. Invalid input will be addressed.
+the end of a command statement. Invalid input will be addressed. Support for Quotes on arguments to skip
+whitespace is not yet integrated. 
 
 List of valid commands:
     $pwd
